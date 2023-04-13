@@ -58,6 +58,6 @@ $(document).ready(function() {
 }); 
 // jquery end
 
-setTimeout(function(){
-    $('#message').fadeOut('slow') //เชื่อม id='message' กับหน้า alerts.html
+setTimeout(function(){ //เชื่อม id='message' กับหน้า alerts.html
+    $('#message').fadeOut('slow') 
 }, 4000)
