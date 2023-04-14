@@ -142,12 +142,13 @@ MESSAGE_TAGS = {
 }
 
 
-# SMTP configuration
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_PORT = 535
-#EMAIL_HOST_USER = 'sirichupong2546@gmail.com'
-#EMAIL_HOST_PASSWORD = 'Korn28082546'
-#EMAIL_USE_TLS = True
+# SMTP configuration (Enable Two Factor Authentication and setup an App Password in Gmail.)
+# oqaveedsqjwnldps
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sirichupong2546@gmail.com'
+EMAIL_HOST_PASSWORD = 'oqaveedsqjwnldps'
+EMAIL_USE_TLS = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
