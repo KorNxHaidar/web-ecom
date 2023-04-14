@@ -4,6 +4,15 @@ from .models import Account
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
+# Verification email
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+
+
 def register(request): #ระบบสมัคร
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -35,8 +44,8 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            # messages.success(request, 'Your are now logged in')
-            return redirect('home')
+            messages.success(request, 'Your are now logged in')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login cregentials')
             return redirect('login')
@@ -47,3 +56,7 @@ def logout(request):
     auth.logout(request)
     messages.success(request, "You are logged out.")
     return  redirect('login')
+
+@login_required(login_url= 'login')
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
