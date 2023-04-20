@@ -96,14 +96,11 @@
                 <dd class="text-right"> ฿ {{tax}}</dd>
             </dl>
             <dl class="dlist-align">
-                <dt>Total:</dt>
+                <dt>Grand Total:</dt>
                 <dd class="text-right text-dark b"><strong>฿ {{grand_total}}</strong></dd>
             </dl>
             <hr>
-            <p class="text-center mb-3">
-                <img src="{% static './images/misc/payments.png' %}" height="26">
-            </p>
-            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Make Payment </a>
+            <a href="{% url 'payments' %}" class="btn btn-primary btn-block"> Qr-code Payment </a>
         </div> <!-- card-body.// -->
         </div> <!-- card.// -->
 

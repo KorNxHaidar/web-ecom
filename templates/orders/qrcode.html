@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>hello {{user}}</h1>
+    <img src="{% url 'qr' mobile=mobile amount=amount %}">
+{% endblock %}
