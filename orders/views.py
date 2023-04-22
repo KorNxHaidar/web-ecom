@@ -1,9 +1,13 @@
+import qrcode as qr
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from carts.models import CartItem
 from .forms import OrderForm
 import datetime
 from .models import Order
+from django.http import HttpResponse
+from PIL import Image
+import libscrc
 
 
 def payments(request): #ระบบจ่ายเงิน
@@ -70,10 +74,7 @@ def place_order(request, total=0, quantity=0,):
         return redirect('checkout')
 
 
-from django.http import HttpResponse
-from PIL import Image
-import libscrc
-import qrcode
+
 
 def calculate_crc(code):
     crc = libscrc.ccitt_false(str.encode(code))
@@ -81,54 +82,30 @@ def calculate_crc(code):
     crc = crc[2:].upper()
     return crc.rjust(4, '0')
 
-# def gen_code(mobile="", amount=1.23):
-#     code="00020101021153037645802TH29370016A000000677010111"
-#     if mobile:
-#         tag,value = 1,"0066"+mobile[1:]
-#         seller='{:02d}{:02d}{}'.format(tag,len(value), value)
-#     else:
-#         raise Exception("Error: gen_code() does not get seller mandatory details")
-#     code+=seller
-#     tag,value = 54, '{:.2f}'.format(amount)
-#     code+='{:02d}{:02d}{}'.format(tag,len(value), value)
-#     code+='6304'
-#     code+=calculate_crc(code)
-#     return code
-
-# def get_qr(request,mobile="",amount=""):
-#     message="mobile: %s, amount: %s"%(mobile,amount)
-#     print(message)
-#     print(f'{mobile} : {amount}')
-#     code=gen_code(mobile=mobile, amount=float(amount))#scb
-#     print(code)
-#     img = qrcode.make(code,box_size=4)
-#     response = HttpResponse(content_type='image/png')
-#     img.save(response, "PNG")
-#     return response
-
-def get_qr(request,mobile="", amount=""):
+def gen_code(mobile="", amount=1.23):
     code="00020101021153037645802TH29370016A000000677010111"
     if mobile:
         tag,value = 1,"0066"+mobile[1:]
-        seller = f"{tag:02d}{len(value):02d}{value}"
-        print(seller)
+        seller='{:02d}{:02d}{}'.format(tag,len(value), value)
     else:
         raise Exception("Error: gen_code() does not get seller mandatory details")
     code+=seller
-    tag,value = 54, f'{float(amount):.2f}'
-    code+=f"{tag:02d}{len(value):02d}{value}"
+    tag,value = 54, '{:.2f}'.format(amount)
+    code+='{:02d}{:02d}{}'.format(tag,len(value), value)
     code+='6304'
-    crc = libscrc.ccitt_false(str.encode(code))
-    crc = str(hex(crc))
-    crc = crc[2:].upper()
-    code+=crc.rjust(4, '0')
+    code+=calculate_crc(code)
+    return code
+
+def get_qr(request,mobile="",amount=""):
     message="mobile: %s, amount: %s"%(mobile,amount)
+    print(message)
+    print(f'{mobile} : {amount}')
+    code=gen_code(mobile=mobile, amount=float(amount))#scb
     print(code)
-    img = qrcode.make(code,box_size=4)
+    img = qr.make(code,box_size=4)
     response = HttpResponse(content_type='image/png')
-    response['Content-Type'] = 'text/html; charset=utf-8'
     img.save(response, "PNG")
-    return response    
+    return response
 
 # def get_qr(request,mobile="",nid="",amount=""):
 #     message="mobile: %s, nid: %s, amount: %s"%(mobile,nid,amount)
