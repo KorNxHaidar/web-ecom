@@ -12,7 +12,7 @@
     <aside class="col-lg-6">
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title mb-4">Billing Address</h4>
+        <h4 class="card-title mb-4">ที่อยู่สำหรับส่งใบเสร็จ</h4>
         <form action="{% url 'place_order' %}" method="POST">
             {% csrf_token %}
             <div class="form-row">
@@ -108,7 +108,7 @@
                 <td> 
                     <div class="price-wrap"> 
                         <var class="price">฿ {{ cart_item.sub_total }}</var> 
-                        <small class="text-muted">฿ {{ cart_item.product.price }} each </small> 
+                        <small class="text-muted">฿ {{ cart_item.product.price }} ต่อชิ้น </small> 
                     </div> <!-- price-wrap .// -->
                 </td>
                 
