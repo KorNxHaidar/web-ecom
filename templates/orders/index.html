@@ -1,0 +1,15 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<h1>Hello, world!</h1>
+<div class="container">
+    <form action="." method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <button type="submit" class="mx-auto block rounded-md border bg-blue-500 px-6 py-2 text-white outline-none">Upload</button>
+    </form>
+    {% if obj %}
+    <h3>Succesfully uploaded</h3>
+    {% endif %}
+</div>
+

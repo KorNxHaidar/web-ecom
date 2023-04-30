@@ -2,11 +2,11 @@ import qrcode as qr
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from carts.models import CartItem
-from .forms import OrderForm
+from .forms import OrderForm, ImageForm
 import datetime
-from .models import Order
+from .models import Order, Image
 from django.http import HttpResponse
-from PIL import Image
+#from PIL import Image
 import libscrc
 
 
@@ -73,9 +73,6 @@ def place_order(request, total=0, quantity=0,):
     else:
         return redirect('checkout')
 
-
-
-
 def calculate_crc(code):
     crc = libscrc.ccitt_false(str.encode(code))
     crc = str(hex(crc))
@@ -107,16 +104,6 @@ def get_qr(request,mobile="",amount=""):
     img.save(response, "PNG")
     return response
 
-# def get_qr(request,mobile="",nid="",amount=""):
-#     message="mobile: %s, nid: %s, amount: %s"%(mobile,nid,amount)
-#     print( message )
-#     code=gen_code(mobile=mobile, amount=float(amount))#scb
-#     print(code)
-#     img = qrcode.make(code,box_size=4)
-#     response = HttpResponse(content_type='image/png')
-#     img.save(response, "PNG")
-#     return response
-
 def qrcode(request, total=0, quantity=0):
     current_user = request.user
 
@@ -138,3 +125,16 @@ def qrcode(request, total=0, quantity=0):
         "amount": grand_total
     }
     return render(request, 'orders/qrcode.html', context)
+
+
+def index(request):
+    if request.method == "POST":
+        form=ImageForm(data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            obj=form.instance
+            return render(request,"index.html",{"obj":obj})
+    else:
+        form=ImageForm()
+    img=Image.objects.all()
+    return render(request,"index.html",{"img":img,"form":form})
