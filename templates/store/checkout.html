@@ -17,50 +17,50 @@
             {% csrf_token %}
             <div class="form-row">
                 <div class="col form-group">
-                    <label for="">First Name</label>
+                    <label for="">ชื่อ</label>
                     <input type="text" name="first_name" class="form-control" required>
                 </div>
                 <div class="col form-group">
-                    <label for="">Lastname Name</label>
+                    <label for="">นามสกุล</label>
                     <input type="text" name="last_name" class="form-control" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
-                    <label for="">Email</label>
+                    <label for="">อีเมล</label>
                     <input type="text" name="email" class="form-control" required>
                 </div>
                 <div class="col form-group">
-                    <label for="">Phone Number</label>
+                    <label for="">เบอร์โทรศัพท์</label>
                     <input type="text" name="phone" class="form-control" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
-                    <label for="">Address Line 1</label>
+                    <label for="">ที่อยู่ 1</label>
                     <input type="text" name="address_line_1" class="form-control" required>
                 </div>
                 <div class="col form-group">
-                    <label for="">Address Line 2</label>
+                    <label for="">ที่อยู่ 2</label>
                     <input type="text" name="address_line_2" class="form-control">
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
-                    <label for="">City</label>
-                    <input type="text" name="city" class="form-control" required>
-                </div>
-                <div class="col form-group">
-                    <label for="">State</label>
+                    <label for="">อำเภอ</label>
                     <input type="text" name="state" class="form-control" required>
                 </div>
                 <div class="col form-group">
-                    <label for="">Country</label>
+                    <label for="">จังหวัด</label>
+                    <input type="text" name="city" class="form-control" required>
+                </div>
+                <div class="col form-group">
+                    <label for="">ประเทศ</label>
                     <input type="text" name="country" class="form-control" required>
                 </div>
             </div>    
             <div class="form-row">
-                <label for="">Order Note</label>
+                <label for="">หมายเหตุ</label>
                 <textarea name="order_note" row="2" class="form-control" ></textarea>
             </div>
             
@@ -76,9 +76,9 @@
         <table class="table table-borderless table-shopping-cart">
             <thead class="text-muted">
             <tr class="small text-uppercase">
-                <th scope="col">Product</th>
-                <th scope="col" width="120">Quantity</th>
-                <th scope="col" width="120">Price</th>
+                <th scope="col">สินค้า</th>
+                <th scope="col" width="120">จำนวน</th>
+                <th scope="col" width="120">ราคา</th>
                 
             </tr>
             </thead>
@@ -117,8 +117,8 @@
             </tbody>
             </table>
             
-            <button type="submit" name="submit" class="btn btn-primary btn-block">Palce Order</button>
-            <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+            <button type="submit" name="submit" class="btn btn-primary btn-block">ดำเนินการต่อ</button>
+            <a href="{% url 'store' %}" class="btn btn-light btn-block">เลือกซื้อสินค้าเพิ่มเติม</a>
             </form>
         </div> <!-- card-body.// -->
         </div> <!-- card.// -->

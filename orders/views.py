@@ -127,7 +127,7 @@ def qrcode(request, total=0, quantity=0):
     return render(request, 'orders/qrcode.html', context)
 
 
-def index(request):
+def index(request): #confirm
     if request.method == "POST":
         form=ImageForm(data=request.POST,files=request.FILES)
         if form.is_valid():
